@@ -1,5 +1,5 @@
 {
-  "name": "bookshelf-api",
+  "name": "submission",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -20,5 +20,8 @@
   "homepage": "https://github.com/silvianaim02/bookshelf-api#readme",
   "devDependencies": {
     "nodemon": "^3.0.1"
+  },
+  "dependencies": {
+    "@hapi/hapi": "^21.3.2"
   }
 }
