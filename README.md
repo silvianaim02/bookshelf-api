@@ -2,7 +2,7 @@
 
 ## Script
 
-Runs the app in the production mode :
+Runs the app :
 
 ```
 npm run start
