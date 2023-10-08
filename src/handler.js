@@ -105,7 +105,35 @@ const getAllBooksHandler = (request, h) => {
   return response;
 };
 
+/* ====================== Menampilkan Detail Buku ====================== */
+
+const getBookByIdHandler = (request, h) => {
+  const { id } = request.params;
+
+  const book = books.filter((item) => item.id === id)[0];
+
+  if (book !== undefined) {
+    return h
+      .response({
+        status: 'success',
+        data: {
+          book,
+        },
+      })
+      .code(200);
+  }
+
+  const response = h
+    .response({
+      status: 'fail',
+      message: 'Buku tidak ditemukan',
+    })
+    .code(404);
+  return response;
+};
+
 module.exports = {
   addBookHandler,
   getAllBooksHandler,
+  getBookByIdHandler,
 };
