@@ -80,6 +80,32 @@ const addBookHandler = (request, h) => {
   return response;
 };
 
+/* ====================== Menampilkan Seluruh Buku ====================== */
+
+const getAllBooksHandler = (request, h) => {
+  if (books.length === 0) {
+    return h
+      .response({
+        status: 'success',
+        data: {
+          books: [],
+        },
+      })
+      .code(200);
+  }
+
+  const response = h
+    .response({
+      status: 'success',
+      data: {
+        books,
+      },
+    })
+    .code(200);
+  return response;
+};
+
 module.exports = {
   addBookHandler,
+  getAllBooksHandler,
 };
