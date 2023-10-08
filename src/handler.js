@@ -83,22 +83,33 @@ const addBookHandler = (request, h) => {
 /* ====================== Menampilkan Seluruh Buku ====================== */
 
 const getAllBooksHandler = (request, h) => {
-  if (books.length === 0) {
-    return h
-      .response({
-        status: 'success',
-        data: {
-          books: [],
-        },
-      })
-      .code(200);
+  const { query } = request;
+
+  let filteredBooks = Array.from(books);
+
+  if (query.name) {
+    filteredBooks = filteredBooks.filter((book) =>
+      book.name.toLowerCase().includes(query.name.toLowerCase())
+    );
+  }
+
+  if (query.reading === '0' || query.reading === '1') {
+    const isReading = query.reading === '1';
+    filteredBooks = filteredBooks.filter((book) => book.reading === isReading);
+  }
+
+  if (query.finished === '0' || query.finished === '1') {
+    const isFinished = query.finished === '1';
+    filteredBooks = filteredBooks.filter(
+      (book) => book.finished === isFinished
+    );
   }
 
   const response = h
     .response({
       status: 'success',
       data: {
-        books: books.map((book) => ({
+        books: filteredBooks.map((book) => ({
           id: book.id,
           name: book.name,
           publisher: book.publisher,
